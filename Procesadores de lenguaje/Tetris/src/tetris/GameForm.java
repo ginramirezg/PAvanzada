@@ -9,11 +9,17 @@ import javax.swing.AbstractAction;
 
 
 /**
+ * La clase GameForm representa la interfaz gráfica de usuario del juego Tetris.
+ * Incluye el área de juego, controles por teclado y la visualización de puntuación y nivel.
+ * Esta clase hereda de javax.swing.JFrame.
  *
  * @author ginar
  */
 public class GameForm extends javax.swing.JFrame {
 
+    /**
+     * Constructor de la clase GameForm que inicializa la interfaz de usuario y el área de juego.
+     */
     private GameArea ga;
     /**
      * Creates new form GameForm
@@ -32,6 +38,9 @@ public class GameForm extends javax.swing.JFrame {
        Action map -> Contiene las acciones de las teclas
     */
     
+    /**
+     * Inicializa los controles por teclado para el juego.
+     */
     private void initControls(){
         
         InputMap im = this.getRootPane().getInputMap();
@@ -76,18 +85,30 @@ public class GameForm extends javax.swing.JFrame {
         });
     }
     
-    //Metodo que al ejecturar el programa comienza el Thread del juego
+    
+    /**
+     * Inicia el juego creando un nuevo hilo (Thread) para la lógica del juego.
+     */
     public void startGame(){
         
         //El metodo start esta disponible en la clase Thread y se hereda a GameThread
         new GameThread(ga, this).start();
     }
     
-    //Metodos para realizar la actualización de el display de score y nivel
+    /**
+     * Actualiza la visualización de la puntuación en la interfaz de usuario.
+     *
+     * @param score Puntuación actual del juego.
+     */
     public void updateScore(int score){
         scoreDisplay.setText("Score: " + score);
     }
     
+    /**
+     * Actualiza la visualización del nivel en la interfaz de usuario.
+     *
+     * @param nivel Nivel actual del juego.
+     */
     public void updateNivel (int nivel){
         nivelDisplay.setText("Nivel: "+ nivel);
     }
