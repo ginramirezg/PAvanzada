@@ -1,26 +1,50 @@
 
+/**
+ * La clase GameThread es un hilo que controla la lógica principal del juego Tetris,
+ * incluyendo la caída de tetriminos, la gestión de puntuación y niveles, y la actualización
+ * de la interfaz de usuario.
+ */
 package tetris;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+/**
+ * Esta clase extiende Thread y se encarga de ejecutar la lógica principal del juego Tetris
+ * en un hilo separado.
+ */
 public class GameThread extends Thread {
     
-    private GameArea ga;
-    private GameForm gf;
-    private int score;
-    private int nivel = 1;
-    private int scorePorNivel = 2;
+   // Atributos de la clase
+
+    private GameArea ga; // El área de juego en la que se desarrolla el juego.
+    private GameForm gf; // El formulario de juego que muestra la interfaz de usuario.
+    private int score; // La puntuación actual del jugador.
+    private int nivel = 1; // El nivel actual del juego.
+    private int scorePorNivel = 2; // Puntuación requerida para avanzar de nivel.
+
+    private int pausa = 1000; // Pausa inicial entre caídas de tetriminos (en milisegundos).
+    private int velocidadPorNivel = 200; // Reducción de la pausa por nivel (en milisegundos).
+
     
-    private int pausa = 1000;
-    private int velocidadPorNivel = 200;
     
+    
+    /**
+     * Constructor de la clase GameThread que recibe el área de juego y el formulario de juego
+     * como parámetros.
+     *
+     * @param ga El área de juego en la que se desarrolla el juego.
+     * @param gf El formulario de juego que muestra la interfaz de usuario.
+     */
     public GameThread(GameArea ga, GameForm gf){
         this.ga = ga;
         this.gf = gf;
     }
     
+    /**
+     * El método run() se encarga de ejecutar la lógica principal del juego en un bucle infinito.
+     * Controla la caída de los tetriminos, la puntuación, los niveles y la actualización de la interfaz de usuario.
+     */
     @Override
     public void run(){
         

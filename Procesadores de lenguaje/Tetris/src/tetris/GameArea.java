@@ -1,6 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * La clase GameArea representa el área de juego en el juego de Tetris, donde se muestran
+ * los tetriminos y se gestiona la interacción con el jugador.
  */
 package tetris;
 
@@ -9,30 +9,40 @@ import javax.swing.JPanel;
 
 
 /**
- *
- * @author ginar
+ * La clase GameArea extiende JPanel y representa el área de juego principal en Tetris.
  */
 public class GameArea extends JPanel{
     
-    
+     // Atributos de la clase
     private int gridRows;
     private int gridColumns;
     
-    /*Atributo fondo que simboliza el area donde se encuentran los tetriminos
-    que han llegado hasta el limite del tablero o estan conjuntas a otras piezas*/
+    /**
+     * Matriz que representa el fondo del área de juego, donde los tetriminos
+     * han llegado a los límites del tablero o están adyacentes a otras piezas.
+     */
     private Color[][] background;
     
-    //Atributo para indicar el tamaño de una sola celda
+     /**
+     * Tamaño de una sola celda en el área de juego.
+     */
     private int gridCellSize;
     
-    //Atributo para crear los tetriminos (De tipo tetrimino que a su vez es una matriz)
+   /**
+     * Representa el tetrimino actual que se controla en el juego.
+     */
     // Se utilizara 1 para indicar si un cuadrado debe tener color y 0 si debe estar en blanco 
     private Tetrimino tetrimino;
     
     
     
     
-    //Constructor para dibujar el area del juego donde apareceran los tetriminos
+    /**
+     * Constructor para crear el área de juego con base en un panel de referencia.
+     *
+     * @param placeholder El panel de referencia que determina el tamaño del área de juego.
+     * @param columns     El número de columnas en el área de juego.
+     */
     public GameArea(JPanel placeholder, int columns){
         //El placeholder es el diseño creado en la clase GameForm qe sirve como referencia para el tamaño del area
         
@@ -56,13 +66,19 @@ public class GameArea extends JPanel{
     
     
     
-    //Metodo para spawnear los tetriminos
+   /**
+     * Inicializa y muestra un nuevo tetrimino en el área de juego.
+     */
     public void spawnTetrimino(){
        tetrimino = new Tetrimino( new int[][]{{1,0},{1,0},{1,1}});
        tetrimino.spawn(gridColumns);
     }
     
-    //Metodo para comprobar si el tetrimino esta fuera de los limites
+   /**
+     * Comprueba si el tetrimino actual está fuera de los límites del área de juego.
+     *
+     * @return true si el tetrimino está fuera de los límites, de lo contrario, false.
+     */
     public boolean tetriminoFueraLimite(){
         if (tetrimino.getY() < 0) {
             tetrimino = null;
@@ -72,7 +88,11 @@ public class GameArea extends JPanel{
     }
     
     
-    //Metodo para comprobar si el tetrimino puede seguir cayendo o no
+    /**
+     * Hace que el tetrimino actual caiga una posición hacia abajo en el área de juego.
+     *
+     * @return true si el tetrimino puede seguir cayendo, de lo contrario, false.
+     */
     public boolean caerTetrimino(){
         
         /*Revisamos primero si la pieza ha tocado el limite , sino la movemos
@@ -94,7 +114,9 @@ public class GameArea extends JPanel{
         return true;
     }
     
-    //Metodos para mover el tetrimino a los lados
+    /**
+     * Mueve el tetrimino actual hacia la derecha en el área de juego, si es posible.
+     */
     /*En todos los metodos que involucre mover o rotar el tetrimino debe agregarse
     el metodo repaint para que el movimiento del tetrimino sea mas smooth
     */
@@ -118,7 +140,9 @@ public class GameArea extends JPanel{
         repaint();
     }
     
-    //Metodo para hacer caer al tetrimino instantaneamente hasta abajo
+   /**
+     * Hace que el tetrimino actual caiga instantáneamente hasta la parte inferior del área de juego.
+     */
      public void dropTetrimino(){
          if(tetrimino == null) return;
          while(checkBottom()){
@@ -127,7 +151,9 @@ public class GameArea extends JPanel{
          repaint();
      }
      
-     //Metodo para rotar el tetrimino
+      /**
+     * Rota el tetrimino actual .
+     */
      public void rotarTetrimino(){
          if(tetrimino == null) return;
          tetrimino.rotar();
@@ -217,7 +243,12 @@ public class GameArea extends JPanel{
         return true;
     }
     
-    
+    /**
+     * Limpia las líneas completas en el área de juego y realiza un desplazamiento hacia abajo
+     * de las filas restantes.
+     *
+     * @return El número de líneas limpiadas.
+     */
     public int limpiarLineas(){
         
         boolean lineaCompleta;
@@ -263,6 +294,9 @@ public class GameArea extends JPanel{
         }
     }
     
+    /**
+     * Mueve el tetrimino actual al fondo del área de juego y lo agrega al fondo.
+     */
     public void moverTetriminioABackground(){
         int[][] forma = tetrimino.getForma();
         int h = tetrimino.getHeight();
