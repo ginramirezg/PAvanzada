@@ -25,7 +25,7 @@ public class Tetrimino {
     private int[][][] formas;
     
     private int rotacionActual;
-    private Color[] coloresDisponibles = {Color.CYAN, Color.MAGENTA, Color.ORANGE};
+    private Color[] coloresDisponibles = {Color.CYAN, Color.MAGENTA, Color.ORANGE, Color.BLUE, Color.RED, Color.GREEN, Color.PINK, Color.YELLOW};
     
     /**
      * Constructor para crear un tetrimino con una forma inicial.
@@ -192,5 +192,12 @@ public class Tetrimino {
     public int getLimiteIzquierda(){
         return x;
     }
+
+    public void setX(int newX){
+        x = newX;
+    }
     
+    public void setY(int newY){
+        y = newY;
+    }
 }

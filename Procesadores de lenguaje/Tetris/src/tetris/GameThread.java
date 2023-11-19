@@ -19,7 +19,7 @@ public class GameThread extends Thread {
 
     private GameArea ga; // El área de juego en la que se desarrolla el juego.
     private GameForm gf; // El formulario de juego que muestra la interfaz de usuario.
-    private int score; // La puntuación actual del jugador.
+    private int score = 0; // La puntuación actual del jugador.
     private int nivel = 1; // El nivel actual del juego.
     private int scorePorNivel = 2; // Puntuación requerida para avanzar de nivel.
 

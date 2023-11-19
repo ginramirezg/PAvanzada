@@ -4,7 +4,9 @@
  */
 package tetris;
 
+import bloquestetris.*;
 import java.awt.*;
+import java.util.Random;
 import javax.swing.JPanel;
 
 
@@ -34,6 +36,8 @@ public class GameArea extends JPanel{
     // Se utilizara 1 para indicar si un cuadrado debe tener color y 0 si debe estar en blanco 
     private Tetrimino tetrimino;
     
+    //Array que contiene todos los tipos de tetriminos
+    private Tetrimino[] tetriminos;
     
     
     
@@ -62,6 +66,8 @@ public class GameArea extends JPanel{
         
        background = new Color[gridRows][gridColumns];
       
+       tetriminos = new Tetrimino[]{new FiguraI(), new FiguraJ(), new FiguraL(),
+           new FiguraO(), new FiguraS(), new FiguraT(), new FiguraZ()};
     }
     
     
@@ -70,7 +76,8 @@ public class GameArea extends JPanel{
      * Inicializa y muestra un nuevo tetrimino en el área de juego.
      */
     public void spawnTetrimino(){
-       tetrimino = new Tetrimino( new int[][]{{1,0},{1,0},{1,1}});
+       Random r = new Random();
+       tetrimino = tetriminos[r.nextInt(tetriminos.length)];
        tetrimino.spawn(gridColumns);
     }
     
@@ -145,7 +152,7 @@ public class GameArea extends JPanel{
      */
      public void dropTetrimino(){
          if(tetrimino == null) return;
-         while(checkBottom()){
+         else if (checkBottom()){
             tetrimino.moverAbajo();
          }
          repaint();
@@ -157,6 +164,15 @@ public class GameArea extends JPanel{
      public void rotarTetrimino(){
          if(tetrimino == null) return;
          tetrimino.rotar();
+         if (tetrimino.getLimiteIzquierda() < 0) {
+             tetrimino.setX(0);
+         }
+         if (tetrimino.getLimiteDerecha() >= gridColumns) {
+             tetrimino.setX(gridColumns - tetrimino.getWidth());
+         }
+         if (tetrimino.getLimiteTablero() >= gridRows) {
+             tetrimino.setY(gridRows - tetrimino.getHeight());
+         }
          repaint();
      }
      
