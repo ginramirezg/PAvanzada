@@ -1,10 +1,8 @@
 
 package bloquestetris;
 
-import tetris.Tetrimino;
 
-
-public class FiguraS extends Tetrimino{
+public class FiguraS extends Figura{
     public FiguraS(){
         super(new int[][]{{0,1,1},{1,1,0}});
     }

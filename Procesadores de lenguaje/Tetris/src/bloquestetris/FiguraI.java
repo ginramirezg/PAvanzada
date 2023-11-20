@@ -7,7 +7,7 @@ import tetris.Tetrimino;
  *
  * @author ginar
  */
-public class FiguraI extends Tetrimino{
+public class FiguraI extends Figura{
     public FiguraI(){
         super(new int[][]{{1,1,1,1}});
     }
