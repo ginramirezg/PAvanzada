@@ -193,11 +193,21 @@ public class Tetrimino {
         return x;
     }
 
-    public void setX(int newX){
-        x = newX;
-    }
-    
-    public void setY(int newY){
-        y = newY;
-    }
+        /**
+      * Establece la coordenada x de la posición del Tetrimino en el tablero.
+      *
+      * @param newX La nueva coordenada x.
+      */
+     public void setX(int newX){
+         x = newX;
+     }
+
+     /**
+      * Establece la coordenada y de la posición del Tetrimino en el tablero.
+      *
+      * @param newY La nueva coordenada y.
+      */
+     public void setY(int newY){
+         y = newY;
+     }
 }
